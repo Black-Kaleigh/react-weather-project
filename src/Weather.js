@@ -3,19 +3,18 @@ import axios from "axios";
 import "./Weather.css";
 
 export default function Weather(props) {
-  const [weatherData, setWeatherData] = useState({ready:false});
+  const [weatherData, setWeatherData] = useState({ ready: false });
   function handleResponse(response) {
     console.log(response.data);
     setWeatherData({
       ready: true,
       temperature: response.data.main.temp,
-      iconUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
+      iconUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
       description: response.data.weather[0].description,
       humidity: response.data.main.humidity,
       date: "Friday 16:44",
       wind: response.data.wind.speed,
-      city: response.data.name
-      
+      city: response.data.name,
     });
   }
   if (weatherData.ready) {
@@ -73,7 +72,7 @@ export default function Weather(props) {
     );
   } else {
     let apiKey = "ff1d9ea9376b5c27a82e04fc2b2abdbb";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q={props.defaultCity}&appid={apikey}&units=metric`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
 
     return "Loading....";
